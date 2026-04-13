@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default;
+}
+@plugin "daisyui/theme" {
+  name: light;
+  default: true;
+  --color-primary: rgba(0, 51, 86, 1);
+  --color-secondary: rgba(43, 151, 157, 1);
+  --color-background: rgba(253, 255, 252, 1);
+}
