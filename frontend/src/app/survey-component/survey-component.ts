@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SurveyModule } from 'survey-angular-ui';
 import { Model } from 'survey-core';
-import surveyJson from '../../temp/survey.json';
+import surveyJson from '../../../temp/survey.json';
 import "survey-core/survey-core.min.css"
 
 @Component({
