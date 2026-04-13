@@ -1,28 +1,10 @@
-<!--<app-nav-bar></app-nav-bar>-->
-
 @if (auth.isLoading$ | async) {
 
   <div>Loading...</div>
 
 } @else {
-  @if ((auth.isAuthenticated$ | async) && (auth.user$ | async); as user) {
-
-    <p>Logged in as {{ user.email }}</p>
-    <h1>User Profile</h1>
-    <pre>{{ user | json }}</pre>
-    <button (click)="auth.logout({ logoutParams: { returnTo: window.location.origin } })" class="btn">Logout</button>
-
-  } @else {
-
-    @if (auth.error$ | async; as error) {
-      <p>Error: {{ error.message }}</p>
-    }
-
-    <button (click)="auth.loginWithRedirect({ authorizationParams: { screen_hint: 'signup' } })" class="btn btn-primary">
-      Sign Up
-    </button>
-    <button (click)="auth.loginWithRedirect()" class="btn">Log In</button>
-
+  @if ((auth.isAuthenticated$ | async) && (auth.user$ | async)) {
+    <app-nav-bar></app-nav-bar>
   }
+  <router-outlet></router-outlet>
 }
-<router-outlet></router-outlet>

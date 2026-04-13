@@ -1,9 +1,14 @@
-<nav>
-  <div>
-    <img src="alternatief-logo-IPTH.png" alt="logo">
+<div class="navbar bg-base-100 shadow-sm">
+  <div class="navbar-start">
+    <img class="w-52" src="logo-IPTH-2026.png" alt="logo">
   </div>
-  <ul>
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/survey">Survey</a></li>
-  </ul>
-</nav>
+  <div class="navbar-center">
+    <ul class="menu menu-horizontal px-1 gap-20">
+      <li><a routerLink="/">Vragenlijsten & rapporten</a></li>
+      <li><a routerLink="/survey">Praktijk Informatie</a></li>
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <button class="btn btn-ghost" (click)="logout()">Afmelden</button>
+  </div>
+</div>
