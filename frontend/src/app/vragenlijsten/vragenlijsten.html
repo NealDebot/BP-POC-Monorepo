@@ -1,0 +1,36 @@
+<div class="m-2 overflow-x-auto border border-base-content/5 rounded-box w-fit mx-auto my-5">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Naam</th>
+      <th>Deadline</th>
+      <th>Vooruitgang</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (vragenlijst of vragenlijstenlist; track vragenlijst.id) {
+        <tr>
+          <td>
+            {{ vragenlijst.title }}
+          </td>
+          <td>
+            {{ vragenlijst.deadline | date:'dd/MM/yyyy' }}
+          </td>
+          <td>
+            <div>
+              <p>{{ vragenlijst.status }}%</p>
+              <progress class="progress progress-primary w-56" value="{{vragenlijst.status}}" max="100"></progress>
+            </div>
+          </td>
+          <th>
+            <button class="btn btn-primary btn-xs">@if (vragenlijst.status > 0) {
+              Verder invullen
+            } @else {
+              Start vragenlijst
+            }</button>
+          </th>
+        </tr>
+      }
+  </table>
+</div>

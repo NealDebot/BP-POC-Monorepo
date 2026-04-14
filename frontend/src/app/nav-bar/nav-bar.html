@@ -1,11 +1,15 @@
-<div class="navbar bg-base-100 shadow-sm">
+<div class="navbar bg-[#e8f5f1] shadow-sm">
   <div class="navbar-start">
-    <img class="w-52" src="logo-IPTH-2026.png" alt="logo">
+    <img class="w-52 cursor-pointer" src="logo-IPTH-2026.png" alt="logo" routerLink="/">
   </div>
   <div class="navbar-center">
     <ul class="menu menu-horizontal px-1 gap-20">
-      <li><a routerLink="/">Vragenlijsten & rapporten</a></li>
-      <li><a routerLink="/survey">Praktijk Informatie</a></li>
+      <li><a routerLink="/" routerLinkActive #rla1="routerLinkActive"
+             [ngClass]="{'text-secondary': rla1.isActive}"
+             [routerLinkActiveOptions]="{exact:true}">Vragenlijsten & rapporten</a></li>
+      <li><a routerLink="/survey" routerLinkActive #rla2="routerLinkActive"
+             [ngClass]="{'text-secondary': rla2.isActive}"
+             [routerLinkActiveOptions]="{exact:true}">Praktijk Informatie</a></li>
     </ul>
   </div>
   <div class="navbar-end">
