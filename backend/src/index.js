@@ -5,10 +5,15 @@ import {disconnectDB, connectDB} from './config/db.js'
 
 //import Routes
 import vragenlijstRoutes from './routes/vragenlijstRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 
 connectDB()
 
 const app = express();
+
+// parsing middleware
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 // Auth0 configuration
 const auth0Config = {
@@ -25,6 +30,7 @@ app.use(auth(auth0Config));
 
 // API Routes
 app.use('/vragenlijst', vragenlijstRoutes)
+app.use('/auth', authRoutes)
 
 process.on("unhandledRejection", (error) => {
     console.error("Unhandled Rejection:", error)

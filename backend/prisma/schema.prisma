@@ -13,4 +13,5 @@ datasource db {
 
 model praktijk {
   id String @id @default(uuid())
+  auth0_id String @unique
 }
