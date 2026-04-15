@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from 'express'
 import {auth} from 'express-openid-connect';
 import {disconnectDB, connectDB} from './config/db.js'
-
+import cors from 'cors'
 //import Routes
 import vragenlijstRoutes from './routes/vragenlijstRoutes.js'
 import authRoutes from './routes/authRoutes.js'
@@ -10,6 +10,7 @@ import authRoutes from './routes/authRoutes.js'
 connectDB()
 
 const app = express();
+app.use(cors())
 
 // parsing middleware
 app.use(express.json());
