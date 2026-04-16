@@ -3,17 +3,21 @@ import {prisma} from '../config/db.js'
 const sync_user = async (req, res) => {
     const {auth0_id} = req.body
 
-    //check if user already exists
     const praktijk = await prisma.praktijk.findUnique({
-        where: {auth0_id: auth0_id}
+        where: {auth0_id: auth0_id},
+        include: {team: {include: {huisartsen: true}}, adressen: true}
     });
-    //if user doesn't exist add create the user
+
     if (!praktijk) {
-        const newPraktijk = await prisma.praktijk.create({
-            data: {
-                auth0_id
-            }
-        });
+        const newPraktijk = await prisma.$transaction(async (tx) => {
+            const team = await tx.team.create({})
+            return tx.praktijk.create({
+                data: {
+                    auth0_id,
+                    team_id: team.id
+                },
+            });
+        })
         res.status(201).json({
             status: "succes",
             data: {

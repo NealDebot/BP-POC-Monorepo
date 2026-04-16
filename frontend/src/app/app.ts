@@ -28,6 +28,6 @@ export class App implements OnInit {
         switchMap(() => this.auth.user$),
         switchMap((user) => this.praktijkService.userSync(user!.sub!)),
       )
-      .subscribe();
+      .subscribe(data => this.praktijkService.praktijk.set(data.data))
   }
 }
