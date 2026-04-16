@@ -14,4 +14,62 @@ datasource db {
 model praktijk {
   id String @id @default(uuid())
   auth0_id String @unique
+  telefoon_nummer String?
+  e_mail String?
+  praktijkvorm String?
+  betalingssysteem String?
+  patient_stop String?
+  online_afspraken Boolean @default(false)
+  multidisciplinair Boolean @default(false)
+  telesecretariaat Boolean @default(false)
+  netwerk_type String?
+  netwerk_aantal Int?
+  netwerk_riziv Boolean @default(false)
+
+  team team? @relation(fields: [team_id], references: [id])
+  team_id Int? @unique
+  adressen adres[]
+}
+
+model team {
+  id Int @id @default(autoincrement())
+  coordinator_directeur Boolean @default(false)
+  onthaal_administratief Boolean @default(false)
+  verpleegkundige Boolean @default(false)
+  dietist_voedingsdeskundige Boolean @default(false)
+  kinesitherapeut_manueeltherapeut_osteopaat Boolean @default(false)
+  sociaal_werker Boolean @default(false)
+  podoloog Boolean @default(false)
+  psycholoog Boolean @default(false)
+  gezondheidspromoter Boolean @default(false)
+  andere String?
+
+  praktijk praktijk?
+  huisartsen huisarts[]
+}
+
+model huisarts {
+  id Int @id @default(autoincrement())
+  in_opleiding Boolean @default(false)
+  email String
+  rizivnr String
+  geboortejaar Int
+  stopzetten String
+
+  team team @relation(fields: [team_id], references: [id])
+  team_id Int
+  adres adres? @relation(fields: [adres_id],references: [id], onDelete: NoAction, onUpdate: NoAction)
+  adres_id Int?
+}
+
+model adres {
+  id Int @id @default(autoincrement())
+  straat String
+  huisnr String
+  postcode String
+  Stad String
+
+  huisartsen huisarts[]
+  praktijk praktijk @relation(fields: [praktijk_id], references: [id])
+  praktijk_id String
 }
