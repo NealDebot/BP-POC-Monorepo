@@ -1,8 +1,8 @@
 import express from "express";
-
+import {checkJwt} from '../middleware/auth0.js'
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/",checkJwt, (req, res) => {
     res.json(vragenlijsten)
 })
 
