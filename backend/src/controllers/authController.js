@@ -16,6 +16,7 @@ const sync_user = async (req, res) => {
                     auth0_id,
                     team_id: team.id
                 },
+                include: {team: {include: {huisartsen: true}}, adressen: true}
             });
         })
         res.status(201).json({

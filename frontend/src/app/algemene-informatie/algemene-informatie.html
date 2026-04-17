@@ -1,0 +1,78 @@
+@if (praktijk()) {
+  <form [formGroup]="algemeneInfoForm" (ngSubmit)="save()" class="w-fit m-auto">
+    <div class="flex justify-between">
+      <fieldset class="fieldset p-4">
+        <legend class="fieldset-legend">Telefoon nummer</legend>
+        <input type="tel" class="input" formControlName="telefoon_nummer"/>
+        @if (algemeneInfoForm.get('telefoon_nummer')!.touched && algemeneInfoForm.get('telefoon_nummer')!.hasError('pattern')) {
+          <p class="text-error">Moet een geldig telefoon nummer zijn!</p>
+        }
+      </fieldset>
+      <fieldset class="fieldset p-4">
+        <legend class="fieldset-legend">Email</legend>
+        <input type="email" class="input" formControlName="e_mail"/>
+        @if (algemeneInfoForm.get('e_mail')!.touched && algemeneInfoForm.get('e_mail')!.hasError('email')) {
+          <p class="text-error">Moet een geldig Email zijn!</p>
+        }
+      </fieldset>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <h3>Adressen</h3>
+      <p>Vul de gegevens in per adres.</p>
+      <div formArrayName="adressen">
+        @for (adres of adressen.controls; let i = $index; track adres; let l = $count) {
+          <div [formGroupName]="i" class="card bg-base-100 card-xs shadow-sm my-5">
+            <div class="card-body">
+              <div class="flex">
+                <fieldset class="fieldset p-4">
+                  <legend class="fieldset-legend">Straat</legend>
+                  <input type="text" class="input" formControlName="straat"/>
+                  @if (adres.get("straat")!.touched && adres.get("straat")!.hasError('required')) {
+                    <p class="text-error">Straat is verplicht!</p>
+                  }
+                </fieldset>
+                <fieldset class="fieldset p-4">
+                  <legend class="fieldset-legend">Huisnr</legend>
+                  <input type="text" class="input" formControlName="huisnr"/>
+                  @if (adres.get("huisnr")!.touched && adres.get("huisnr")!.hasError('required')) {
+                    <p class="text-error">Huisnr is verplicht!</p>
+                  }
+                </fieldset>
+              </div>
+              <div class="flex">
+                <fieldset class="fieldset p-4">
+                  <legend class="fieldset-legend">Postcode</legend>
+                  <input type="text" class="input" formControlName="postcode"/>
+                  @if (adres.get("postcode")!.touched && adres.get("postcode")!.hasError('required')) {
+                    <p class="text-error">Postcode is verplicht!</p>
+                  }
+                </fieldset>
+                <fieldset class="fieldset p-4">
+                  <legend class="fieldset-legend">Stad/gemeente</legend>
+                  <input type="text" class="input" formControlName="Stad"/>
+                  @if (adres.get("Stad")!.touched && adres.get("Stad")!.hasError('required')) {
+                    <p class="text-error">Stad is verplicht!</p>
+                  }
+                </fieldset>
+              </div>
+            </div>
+            @if (l !== 1) {
+              <div class="justify-end card-actions p-2">
+                <button type="button" (click)="removeAdres(i)" class="btn btn-error ">Verwijderen</button>
+              </div>
+            }
+          </div>
+        }
+      </div>
+      <button type="button" (click)="addAdres()" class="btn btn-primary my-2">Adres toevoegen</button>
+    </div>
+    <div class="divider"></div>
+    <div class="flex justify-end gap-4">
+      <button type="submit" [disabled]="!algemeneInfoForm.valid" class="btn btn-primary">Opslaan</button>
+      <button type="button" (click)="cancel()" class="btn btn-outline">Annuleren</button>
+    </div>
+  </form>
+} @else {
+  <p>loading...</p>
+}

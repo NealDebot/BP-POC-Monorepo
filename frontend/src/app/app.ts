@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { NavBar } from './nav-bar/nav-bar';
 import { PraktijkService } from './services/praktijk.service';
-import {filter,take,switchMap} from 'rxjs'
+import { filter, take, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +28,6 @@ export class App implements OnInit {
         switchMap(() => this.auth.user$),
         switchMap((user) => this.praktijkService.userSync(user!.sub!)),
       )
-      .subscribe(data => this.praktijkService.praktijk.set(data.data))
+      .subscribe();
   }
 }

@@ -5,6 +5,7 @@ import cors from 'cors'
 //import Routes
 import vragenlijstRoutes from './routes/vragenlijstRoutes.js'
 import authRoutes from './routes/authRoutes.js'
+import praktijkRoutes from './routes/praktijkRoutes.js'
 
 connectDB()
 
@@ -12,7 +13,7 @@ const app = express();
 app.use(cors({
     origin: ['http://localhost:4200'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     preflightContinue: false,
     optionsSuccessStatus: 204,
 }))
@@ -27,6 +28,7 @@ app.use(express.urlencoded({extended: true}));
 // API Routes
 app.use('/vragenlijst', vragenlijstRoutes)
 app.use('/auth', authRoutes)
+app.use('/praktijk', praktijkRoutes)
 
 process.on("unhandledRejection", (error) => {
     console.error("Unhandled Rejection:", error)
