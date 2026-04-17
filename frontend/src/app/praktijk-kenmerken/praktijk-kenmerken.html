@@ -1,1 +1,108 @@
-<p>praktijk-kenmerken works!</p>
+@if (praktijk()) {
+  <form [formGroup]="praktijkKenmerkenForm" class="w-fit m-auto" (ngSubmit)="save()">
+    <div class="card bg-base-100 card-xs shadow-sm my-5 w-96">
+      <div class="card-body">
+        <div class="flex justify-between">
+          <fieldset class="fieldset p-4 w-1/2">
+            <legend class="fieldset-legend">Praktijkvorm</legend>
+            <select class="select" formControlName="praktijkvorm">
+              <option>Solo</option>
+              <option>Duo</option>
+              <option>Groepspraktijk</option>
+            </select>
+          </fieldset>
+          <fieldset class="fieldset p-4 w-1/2">
+            <legend class="fieldset-legend">Betalingssysteem</legend>
+            <select class="select" formControlName="betalingssysteem">
+              <option>Forfaitair</option>
+              <option>Per prestatie</option>
+            </select>
+          </fieldset>
+        </div>
+        <fieldset class="fieldset p-4 w-1/2">
+          <legend class="fieldset-legend">Patiënten Stop</legend>
+          <select class="select" formControlName="patient_stop">
+            <option>Neen</option>
+            <option>Ja, gedeeltelijk</option>
+            <option>Ja, volledig</option>
+          </select>
+        </fieldset>
+        <label class="flex justify-between cursor-pointer">
+          Online afspraken maken
+          <input type="checkbox" checked="checked" class="toggle" formControlName="online_afspraken"/>
+        </label>
+        <label class="flex justify-between cursor-pointer">
+          Multidisciplinair
+          <input type="checkbox" checked="checked" class="toggle" formControlName="multidisciplinair"/>
+        </label>
+        <label class="flex justify-between cursor-pointer">
+          Telesecretariaat
+          <input type="checkbox" checked="checked" class="toggle" formControlName="telesecretariaat"/>
+        </label>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="card bg-base-100 card-xs shadow-sm my-5 w-96">
+      <div class="card-body">
+        <p>Werkt de praktijk samen met andere praktijken voor ...</p>
+        <label class="flex gap-2 items-center cursor-pointer">
+          <input type="checkbox" [checked]="netwerk_typeChecked('Geen samenwerking')" class="checkbox"  (click)="updateNetwerk_type('Geen samenwerking')"/>
+          Geen samenwerking
+        </label>
+        <label class="flex gap-2 items-center cursor-pointer" >
+          <input type="checkbox" [checked]="netwerk_typeChecked('Organisatie van de permanentie (buiten de wachtdienst)')" class="checkbox" (click)="updateNetwerk_type('Organisatie van de permanentie (buiten de wachtdienst)')"/>
+          Organisatie van de permanentie (buiten de wachtdienst)
+        </label>
+        <label class="flex gap-2 items-center cursor-pointer" >
+          <input type="checkbox" [checked]="netwerk_typeChecked('Vervanging tijdens geplande afwezigheid')" class="checkbox" (click)="updateNetwerk_type('Vervanging tijdens geplande afwezigheid')" />
+          Vervanging tijdens geplande afwezigheid
+        </label>
+        <label class="flex gap-2 items-center cursor-pointer" >
+          <input type="checkbox" [checked]="netwerk_typeChecked('Vervanging tijdens onverwachte afwezigheid')" class="checkbox" (click)="updateNetwerk_type('Vervanging tijdens onverwachte afwezigheid')"/>
+          Vervanging tijdens onverwachte afwezigheid
+        </label>
+        <label class="flex gap-2 items-center cursor-pointer" >
+          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeelde patientendossiers')" class="checkbox" (click)="updateNetwerk_type('Gedeelde patientendossiers')"/>
+          Gedeelde patiëntendossiers
+        </label>
+        <label class="flex gap-2 items-center cursor-pointer" >
+          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeelde administratieve medewerker(s)')" class="checkbox" (click)="updateNetwerk_type('Gedeelde administratieve medewerker(s)')"/>
+          Gedeelde administratieve medewerker(s)
+        </label>
+        <label class="flex gap-2 items-center cursor-pointer" >
+          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeelde verpleegkundige(n)')" class="checkbox" (click)="updateNetwerk_type('Gedeelde verpleegkundige(n)')"/>
+          Gedeelde verpleegkundige(n)
+        </label>
+        <label class="flex gap-2 items-center cursor-pointer" >
+          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeeld materiaal')" class="checkbox" (click)="updateNetwerk_type('Gedeeld materiaal')"/>
+          Gedeeld materiaal
+        </label>
+        <label class="flex gap-2 items-center cursor-pointer">
+          <input type="checkbox" [checked]="netwerk_typeChecked('Casusbespreking overleg richtlijnen, incidenten-analyse,...')" class="checkbox" (click)="updateNetwerk_type('Casusbespreking overleg richtlijnen, incidenten-analyse,...')"/>
+          Casusbespreking overleg richtlijnen, incidenten-analyse,...
+        </label>
+        <label class="flex gap-2 items-center cursor-pointer" >
+          <input type="checkbox" [checked]="netwerk_typeChecked('Andere')" class="checkbox" (click)="updateNetwerk_type('Andere')"/>
+          Andere
+        </label>
+        <fieldset class="fieldset p-4">
+          <legend class="fieldset-legend">Aantal praktijken in Netwerk?  (inclusief eigen praktijk)</legend>
+          <input type="number" class="input" min="0" formControlName="netwerk_aantal"/>
+        </fieldset>
+        <label class="flex justify-between cursor-pointer">
+          RIZIV erkend netwerk?
+          <input type="checkbox" checked="checked" class="toggle" formControlName="netwerk_riziv"/>
+        </label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="flex justify-end gap-4">
+      <button type="submit" [disabled]="!praktijkKenmerkenForm.valid" class="btn btn-primary">Opslaan</button>
+      <button type="button" class="btn btn-outline" (click)="reset()">Annuleren</button>
+    </div>
+  </form>
+} @else {
+  <p>loading...</p>
+}
