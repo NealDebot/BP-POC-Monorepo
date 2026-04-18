@@ -1,7 +1,6 @@
 import {PrismaClient} from "@prisma/client";
 import {PrismaMssql} from "@prisma/adapter-mssql"
 
-console.log("DB config:", process.env.DATABASE_SERVER, process.env.DATABASE_PORT)
 const adapter = new PrismaMssql({
     server: process.env.DATABASE_SERVER,
     port: Number(process.env.DATABASE_PORT),

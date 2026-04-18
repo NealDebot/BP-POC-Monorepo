@@ -78,14 +78,14 @@ model adres {
 model vragenlijst {
   id Int @id @default(autoincrement())
   naam String
-  json String
+  json String @db.NVarChar(Max)
   deadline DateTime
   surveyAntwoordens survey_antwoorden[]
 }
 
 model survey_antwoorden{
   id Int @id @default(autoincrement())
-  antwoorden String
+  antwoorden String @db.NVarChar(Max)
   vooruitgang Int
 
   vragenlijst vragenlijst @relation(fields: [vragenlijst_id], references: [id])
