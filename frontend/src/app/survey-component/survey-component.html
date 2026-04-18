@@ -1,1 +1,6 @@
-<survey [model]="surveyModel"></survey>
+@if (praktijk()){
+  <survey [model]="surveyModel"></survey>
+} @else {
+  <p>Loading...</p>
+}
+

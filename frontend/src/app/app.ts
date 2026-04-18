@@ -5,6 +5,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { NavBar } from './nav-bar/nav-bar';
 import { PraktijkService } from './services/praktijk.service';
 import { filter, take, switchMap } from 'rxjs';
+import { Toast } from './services/toast';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class App implements OnInit {
   constructor(private praktijkService: PraktijkService) {}
   protected readonly window: Window = window;
   protected auth: AuthService = inject(AuthService);
+  protected toastService: Toast = inject(Toast)
 
   ngOnInit(): void {
     this.auth.isLoading$

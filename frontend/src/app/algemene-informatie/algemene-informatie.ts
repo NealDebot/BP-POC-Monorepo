@@ -2,6 +2,7 @@ import { Component, effect, inject } from '@angular/core';
 import { PraktijkService } from '../services/praktijk.service';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Praktijk } from '../interfaces/praktijk';
+import { Toast } from '../services/toast';
 
 @Component({
   selector: 'app-algemene-informatie',
@@ -16,6 +17,7 @@ export class AlgemeneInformatie {
       if (p && this.adressen.length === 0) this.initForm(p);
     });
   }
+  private toastService = inject(Toast);
   private praktijkService = inject(PraktijkService);
   public praktijk = this.praktijkService.praktijk;
   public algemeneInfoForm = new FormGroup({
@@ -47,9 +49,15 @@ export class AlgemeneInformatie {
   };
 
   save = () => {
-    this.praktijkService
-      .updateAlgemeneInfo(this.algemeneInfoForm.value)
-      .subscribe((data) => this.praktijkService.praktijk.set(data.data));
+    this.praktijkService.updateAlgemeneInfo(this.algemeneInfoForm.value).subscribe({
+      next: (data) => {
+        this.praktijkService.praktijk.set(data.data);
+        this.toastService.add('Opgeslagen');
+      },
+      error: (err) => {
+        this.toastService.add('Er is iets fout gelopen');
+      },
+    });
   };
   cancel = () => {
     const p = this.praktijkService.praktijk();

@@ -2,6 +2,7 @@ import { Component, effect, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PraktijkService } from '../services/praktijk.service';
 import { Praktijk } from '../interfaces/praktijk';
+import { Toast } from '../services/toast';
 
 @Component({
   selector: 'app-praktijk-kenmerken',
@@ -10,6 +11,7 @@ import { Praktijk } from '../interfaces/praktijk';
   styleUrl: './praktijk-kenmerken.css',
 })
 export class PraktijkKenmerken {
+  private toastService = inject(Toast);
   private praktijkService = inject(PraktijkService);
   public praktijk = this.praktijkService.praktijk;
   public praktijkKenmerkenForm = new FormGroup({
@@ -76,9 +78,15 @@ export class PraktijkKenmerken {
   save = () => {
     const typestring = this.netwerk_typeArray.join(';');
     this.praktijkKenmerkenForm.controls.netwerk_type.setValue(typestring);
-    this.praktijkService
-      .updateKenmerken(this.praktijkKenmerkenForm.value)
-      .subscribe((data) => this.praktijkService.praktijk.set(data.result));
+    this.praktijkService.updateKenmerken(this.praktijkKenmerkenForm.value).subscribe({
+      next: (data) => {
+        this.praktijkService.praktijk.set(data.result);
+        this.toastService.add('Opgeslagen');
+      },
+      error: (err) => {
+        this.toastService.add('Er is iets fout gelopen');
+      },
+    });
   };
   reset = () => {
     const p = this.praktijkService.praktijk();

@@ -2,6 +2,7 @@ import { Component, effect, inject } from '@angular/core';
 import { PraktijkService } from '../services/praktijk.service';
 import { Praktijk } from '../interfaces/praktijk';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Toast } from '../services/toast';
 
 @Component({
   selector: 'app-team-samenstelling',
@@ -16,6 +17,7 @@ export class TeamSamenstelling {
       if (p) this.initForm(p);
     });
   }
+  private toastService = inject(Toast);
   private praktijkService = inject(PraktijkService);
   public praktijk = this.praktijkService.praktijk;
   public teamForm = new FormGroup({
@@ -82,7 +84,15 @@ export class TeamSamenstelling {
   };
 
   save = () => {
-    this.praktijkService.updateTeam(this.teamForm.value).subscribe((data) => this.praktijkService.praktijk.set(data.result));
+    this.praktijkService.updateTeam(this.teamForm.value).subscribe({
+      next: (data) => {
+        this.praktijkService.praktijk.set(data.result);
+        this.toastService.add('Opgeslagen');
+      },
+      error: (err) => {
+        this.toastService.add('Er is iets fout gelopen');
+      },
+    });
   };
   reset = () => {
     const p = this.praktijk();

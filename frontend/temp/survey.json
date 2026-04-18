@@ -43,6 +43,7 @@
           "name": "question2",
           "title": "Hoevel patiënten met een globaal medisch dossier (GMD) telt deze praktijk?",
           "isRequired": true,
+          "visibleIf": "{betalingssysteem} = 'Per prestatie'",
           "inputType": "number"
         },
         {
@@ -50,6 +51,7 @@
           "name": "question3",
           "title": "Hoeveel patiënten zijn er ingeschreven in deze praktijk?",
           "isRequired": true,
+          "visibleIf": "{betalingssysteem} = 'Forfaitair'",
           "inputType": "number"
         }
       ]
