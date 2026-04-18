@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PraktijkService } from '../services/praktijk.service';
+import { VragenlijstService } from '../services/vragenlijst.service';
 
 @Component({
   selector: 'app-vragenlijsten',
@@ -9,21 +11,20 @@ import { CommonModule } from '@angular/common';
   styleUrl: './vragenlijsten.css',
 })
 export class Vragenlijsten {
-  public vragenlijstenlist = vragenlijsten;
+  constructor() {
+    effect(() => {
+      const p = this.praktijkService.praktijk();
+      if (p) {
+        this.vragenlijstService
+          .getVragenlijsten(p.id)
+          .subscribe((data: any) => this.vragenlijsten.set(data));
+      }
+    });
+  }
+  private praktijkService = inject(PraktijkService);
+  private vragenlijstService = inject(VragenlijstService);
+  public vragenlijsten = signal<{
+    newVragenlijsten: Vragenlijst[];
+    antwoorden: Antwoorden[];
+  } | null>(null);
 }
-const vragenlijsten = [
-  {
-    id: 0,
-    surveyId: 0,
-    title: 'jaarlijkste vragenlijst',
-    deadline: new Date(),
-    status: 0,
-  },
-  {
-    id: 1,
-    surveyId: 1,
-    title: '3 jaarlijkste vragenlijst',
-    deadline: new Date(),
-    status: 80,
-  },
-];

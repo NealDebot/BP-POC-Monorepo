@@ -1,36 +1,59 @@
-<div class="m-2 overflow-x-auto border border-base-content/5 rounded-box w-fit mx-auto my-5">
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Naam</th>
-      <th>Deadline</th>
-      <th>Vooruitgang</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-      @for (vragenlijst of vragenlijstenlist; track vragenlijst.id) {
-        <tr>
-          <td>
-            {{ vragenlijst.title }}
-          </td>
-          <td>
-            {{ vragenlijst.deadline | date:'dd/MM/yyyy' }}
-          </td>
-          <td>
-            <div>
-              <p>{{ vragenlijst.status }}%</p>
-              <progress class="progress progress-primary w-56" value="{{vragenlijst.status}}" max="100"></progress>
-            </div>
-          </td>
-          <th>
-            <button class="btn btn-primary btn-xs">@if (vragenlijst.status > 0) {
-              Verder invullen
-            } @else {
-              Start vragenlijst
-            }</button>
-          </th>
-        </tr>
-      }
-  </table>
-</div>
+@if (vragenlijsten()) {
+  <div class="m-2 overflow-x-auto border border-base-content/5 rounded-box w-fit mx-auto my-5">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Deadline</th>
+        <th>Vooruitgang</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (v of vragenlijsten()!.newVragenlijsten; track v.id) {
+          <tr>
+            <td>
+              {{ v.naam }}
+            </td>
+            <td>
+              {{ v.deadline | date:'dd/MM/yyyy' }}
+            </td>
+            <td>
+              <div>
+                <p>0%</p>
+                <progress class="progress progress-primary w-56" value="0" max="100"></progress>
+              </div>
+            </td>
+            <th>
+              <button class="btn btn-primary btn-xs">
+                Start vragenlijst
+              </button>
+            </th>
+          </tr>
+        }
+        @for (a of vragenlijsten()!.antwoorden; track a.id) {
+          <tr>
+            <td>
+              {{ a.vragenlijst.naam }}
+            </td>
+            <td>
+              {{ a.vragenlijst.deadline | date:'dd/MM/yyyy' }}
+            </td>
+            <td>
+              <div>
+                <p>{{ a.vooruitgang }}%</p>
+                <progress class="progress progress-primary w-56" value="{{a.vooruitgang}}" max="100"></progress>
+              </div>
+            </td>
+            <th>
+              <button class="btn btn-primary btn-xs">
+                Verder invullen
+              </button>
+            </th>
+          </tr>
+        }
+    </table>
+  </div>
+} @else {
+  <p>Loading...</p>
+}
