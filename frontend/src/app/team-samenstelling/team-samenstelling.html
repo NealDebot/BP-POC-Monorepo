@@ -1,1 +1,130 @@
-<p>team-samenstelling works!</p>
+@if (praktijk()) {
+  <form [formGroup]="teamForm" class="w-fit m-auto" (ngSubmit)="save()">
+    <div>
+      <h3>Huisartsen</h3>
+      <p>Vul de gegevens in per huisarts.</p>
+      <div formArrayName="huisartsen">
+        @for (huisarts of huisartsen.controls; let i = $index; track huisarts) {
+          <div [formGroupName]="i" class="card bg-base-100 card-xs shadow-sm my-5">
+            <div class="card-body">
+              <fieldset class="fieldset p-4 w-full">
+                <legend class="fieldset-legend">Email</legend>
+                <input type="email" class="input w-full" formControlName="email"/>
+                @if (huisarts.get('email')!.touched && huisarts.get('email')!.hasError('required')) {
+                  <p class="text-error">Moet een geldig Email zijn!</p>
+                }
+              </fieldset>
+              <div class="flex justify-between">
+                <fieldset class="fieldset p-4">
+                  <legend class="fieldset-legend">RIZIV-nummer</legend>
+                  <input type="text" class="input" formControlName="rizivnr"/>
+                  @if (huisarts.get('rizivnr')!.touched && huisarts.get('rizivnr')!.hasError('required')) {
+                    <p class="text-error">Moet een geldig RIZIV-nummer zijn!</p>
+                  }
+                </fieldset>
+                <fieldset class="fieldset p-4">
+                  <legend class="fieldset-legend">Geboortejaar</legend>
+                  <input type="number" max="2026" min="1926" class="input" formControlName="geboortejaar"/>
+                  @if (huisarts.get('geboortejaar')!.touched && huisarts.get('geboortejaar')!.hasError('required')) {
+                    <p class="text-error">Moet een geldig geboortejaar zijn!</p>
+                  }
+                </fieldset>
+              </div>
+              <div class="flex justify-between items-center">
+                <label class="flex justify-between cursor-pointer h-fit gap-4 p-4">
+                  Huisarts in opleiding
+                  <input type="checkbox" checked="checked" class="toggle" formControlName="in_opleiding"/>
+                </label>
+                <fieldset class="fieldset p-4 w-1/2">
+                  <legend class="fieldset-legend">Adres</legend>
+                  <select class="select" formControlName="adres">
+                    @for (adres of praktijk()!.adressen; track adres) {
+                      <option value="{{adres.id}}">{{ adres.straat }} {{ adres.huisnr }}
+                        , {{ adres.postcode }} {{ adres.Stad }}
+                      </option>
+                    }
+                  </select>
+                </fieldset>
+              </div>
+              <div class="flex justify-between items-center">
+                <fieldset class="fieldset p-4 w-1/2">
+                  <legend class="fieldset-legend">Stopzetting verwacht</legend>
+                  <select class="select" formControlName="stopzetten">
+                    <option>Neen</option>
+                    <option>Ja, Binnen een termijn van 5 jaar</option>
+                    <option>Ja, Binnen een termijn van 4 jaar</option>
+                    <option>Ja, Binnen een termijn van 3 jaar</option>
+                    <option>Ja, Binnen een termijn van 2 jaar</option>
+                    <option>Ja, Binnen een termijn van 1 jaar</option>
+                    <option>Ja, Binnen een termijn van 6 maanden</option>
+                  </select>
+                </fieldset>
+                <div class="p-2">
+                  <button type="button" (click)="removeHuisarts(i)" class="btn btn-error ">Verwijderen</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      <button type="button" (click)="addHuisarts()" class="btn btn-primary my-2">Huisarts toevoegen</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>Overig personeel</h3>
+    <p>Geef aan welke functies aanwezig zijn in uw praktijk.</p>
+    <div class="card bg-base-100 card-xs shadow-sm my-5">
+      <div class="card-body">
+        <label class="flex justify-between cursor-pointer h-fit gap-4">
+          Algemeen Coördinator of directeur
+          <input type="checkbox" checked="checked" class="toggle" formControlName="coordinator_directeur"/>
+        </label>
+        <label class="flex justify-between cursor-pointer h-fit gap-4">
+          Onthaal- of administratief medewerer
+          <input type="checkbox" checked="checked" class="toggle" formControlName="onthaal_administratief"/>
+        </label>
+        <label class="flex justify-between cursor-pointer h-fit gap-4">
+          Verpleegkundige
+          <input type="checkbox" checked="checked" class="toggle" formControlName="verpleegkundige"/>
+        </label>
+        <label class="flex justify-between cursor-pointer h-fit gap-4">
+          Diëtist of voedingsdeskundige
+          <input type="checkbox" checked="checked" class="toggle" formControlName="dietist_voedingsdeskundige"/>
+        </label>
+        <label class="flex justify-between cursor-pointer h-fit gap-4">
+          Kinesitherapeut, manueel therapeut, osteopaat
+          <input type="checkbox" checked="checked" class="toggle" formControlName="kinesitherapeut_manueeltherapeut_osteopaat"/>
+        </label>
+        <label class="flex justify-between cursor-pointer h-fit gap-4">
+          Sociaal werker
+          <input type="checkbox" checked="checked" class="toggle" formControlName="sociaal_werker"/>
+        </label>
+        <label class="flex justify-between cursor-pointer h-fit gap-4">
+          Podoloog
+          <input type="checkbox" checked="checked" class="toggle" formControlName="podoloog"/>
+        </label>
+        <label class="flex justify-between cursor-pointer h-fit gap-4">
+          Psycholoog
+          <input type="checkbox" checked="checked" class="toggle" formControlName="psycholoog"/>
+        </label>
+        <label class="flex justify-between cursor-pointer h-fit gap-4">
+          Gezondheidspromotor
+          <input type="checkbox" checked="checked" class="toggle" formControlName="gezondheidspromoter"/>
+        </label>
+        <fieldset class="fieldset p-4">
+          <legend class="fieldset-legend">Andere</legend>
+          <input type="text" class="input w-full" formControlName="andere"/>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="flex justify-end gap-4">
+      <button type="submit" [disabled]="!teamForm.valid" class="btn btn-primary">Opslaan</button>
+      <button type="button" class="btn btn-outline" (click)="reset()">Annuleren</button>
+    </div>
+  </form>
+} @else {
+  <p>Loading...</p>
+}

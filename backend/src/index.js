@@ -6,6 +6,7 @@ import cors from 'cors'
 import vragenlijstRoutes from './routes/vragenlijstRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import praktijkRoutes from './routes/praktijkRoutes.js'
+import teamRoutes from './routes/teamRoutes.js'
 
 connectDB()
 
@@ -29,6 +30,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/vragenlijst', vragenlijstRoutes)
 app.use('/auth', authRoutes)
 app.use('/praktijk', praktijkRoutes)
+app.use('/team', teamRoutes)
 
 process.on("unhandledRejection", (error) => {
     console.error("Unhandled Rejection:", error)

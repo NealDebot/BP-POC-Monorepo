@@ -26,4 +26,8 @@ export class PraktijkService {
   updateKenmerken(data: any): Observable<any> {
     return this.httpClient.patch(baseURL + '/praktijk/' + this.praktijk()!.id + '/kenmerken', data);
   }
+
+  updateTeam(data:any): Observable<any> {
+    return this.httpClient.patch(baseURL + '/team/' + this.praktijk()!.team.id, data);
+  }
 }

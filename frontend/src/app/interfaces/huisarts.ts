@@ -1,3 +1,5 @@
+import { Adres } from './adres';
+
 export interface Huisarts {
   id: number;
   in_opleiding: boolean;
@@ -5,4 +7,5 @@ export interface Huisarts {
   rizivnr: string;
   geboortejaar: number;
   stopzetten: string;
+  adres: Adres;
 }

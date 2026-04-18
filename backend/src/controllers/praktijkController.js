@@ -27,7 +27,7 @@ const updateAlgemeneInfo = async (req, res) => {
     const result = await prisma.praktijk.update({
         where: {id: id},
         data: {telefoon_nummer: telefoon_nummer, e_mail: e_mail},
-        include: {team: {include: {huisartsen: true}}, adressen: true}
+        include: {team: {include: {huisartsen: {include: {adres: true}}}}, adressen: true}
     })
     res.status(200).json({data: result})
 }
@@ -36,8 +36,8 @@ const updateKenmerken = async (req, res) => {
     const id = req.params.id
     const result = await prisma.praktijk.update({
         where: {id: id},
-        data:{...req.body},
-        include: {team: {include: {huisartsen: true}}, adressen: true}
+        data: {...req.body},
+        include: {team: {include: {huisartsen: {include: {adres: true}}}}, adressen: true}
     })
     res.status(200).json({result})
 }

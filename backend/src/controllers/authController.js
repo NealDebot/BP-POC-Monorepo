@@ -5,7 +5,7 @@ const sync_user = async (req, res) => {
 
     const praktijk = await prisma.praktijk.findUnique({
         where: {auth0_id: auth0_id},
-        include: {team: {include: {huisartsen: true}}, adressen: true}
+        include: {team: {include: {huisartsen: {include: {adres: true}}}}, adressen: true}
     });
 
     if (!praktijk) {
@@ -16,7 +16,7 @@ const sync_user = async (req, res) => {
                     auth0_id,
                     team_id: team.id
                 },
-                include: {team: {include: {huisartsen: true}}, adressen: true}
+                include: {team: {include: {huisartsen: {include: {adres: true}}}}, adressen: true}
             });
         })
         res.status(201).json({
