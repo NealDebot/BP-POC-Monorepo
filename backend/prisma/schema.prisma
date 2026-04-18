@@ -29,6 +29,7 @@ model praktijk {
   team team? @relation(fields: [team_id], references: [id])
   team_id Int? @unique
   adressen adres[]
+  surveyAntwoordens survey_antwoorden[]
 }
 
 model team {
@@ -70,6 +71,25 @@ model adres {
   Stad String
 
   huisartsen huisarts[]
+  praktijk praktijk @relation(fields: [praktijk_id], references: [id])
+  praktijk_id String
+}
+
+model vragenlijst {
+  id Int @id @default(autoincrement())
+  naam String
+  json String
+  deadline DateTime
+  surveyAntwoordens survey_antwoorden[]
+}
+
+model survey_antwoorden{
+  id Int @id @default(autoincrement())
+  antwoorden String
+  vooruitgang Int
+
+  vragenlijst vragenlijst @relation(fields: [vragenlijst_id], references: [id])
+  vragenlijst_id Int
   praktijk praktijk @relation(fields: [praktijk_id], references: [id])
   praktijk_id String
 }
