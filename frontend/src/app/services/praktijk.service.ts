@@ -2,8 +2,9 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Praktijk } from '../interfaces/praktijk';
+import { environment } from '../../environments/environment'
 
-const baseURL = 'http://localhost:3000';
+const baseURL = environment.api.baseURL;
 @Injectable({
   providedIn: 'root',
 })

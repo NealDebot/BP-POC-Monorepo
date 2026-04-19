@@ -7,4 +7,7 @@ export const environment = {
       audience: 'https://dev-2vcah3o1veexgsgm.eu.auth0.com/api/v2/',
     },
   },
+  api: {
+    baseURL: 'http://localhost:3000',
+  },
 };
