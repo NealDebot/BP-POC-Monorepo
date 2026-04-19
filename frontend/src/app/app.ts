@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { NavBar } from './nav-bar/nav-bar';
 import { PraktijkService } from './services/praktijk.service';
@@ -14,10 +14,13 @@ import { Toast } from './services/toast';
   styleUrl: './app.css',
 })
 export class App implements OnInit {
-  constructor(private praktijkService: PraktijkService) {}
+  constructor(
+    private praktijkService: PraktijkService,
+    private router: Router,
+  ) {}
   protected readonly window: Window = window;
   protected auth: AuthService = inject(AuthService);
-  protected toastService: Toast = inject(Toast)
+  protected toastService: Toast = inject(Toast);
 
   ngOnInit(): void {
     this.auth.isLoading$
@@ -30,6 +33,10 @@ export class App implements OnInit {
         switchMap(() => this.auth.user$),
         switchMap((user) => this.praktijkService.userSync(user!.sub!)),
       )
-      .subscribe();
+      .subscribe((data) => {
+        if (!data.data.praktijk.betalingssysteem) {
+          this.router.navigate(['/praktijkInformatie']);
+        }
+      });
   }
 }

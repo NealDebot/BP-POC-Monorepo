@@ -44,7 +44,7 @@ export class TeamSamenstelling {
       email: new FormControl(null, Validators.required),
       rizivnr: new FormControl(null, Validators.required),
       geboortejaar: new FormControl(null, Validators.required),
-      stopzetten: new FormControl("Neen", Validators.required),
+      stopzetten: new FormControl('Neen', Validators.required),
       adres: new FormControl(null, Validators.required),
     });
     this.huisartsen.push(huisarts);
@@ -67,8 +67,8 @@ export class TeamSamenstelling {
       sociaal_werker: p.team.sociaal_werker,
       verpleegkundige: p.team.sociaal_werker,
     });
-    this.huisartsen.clear()
-    for (const h of p.team.huisartsen){
+    this.huisartsen.clear();
+    for (const h of p.team.huisartsen) {
       this.huisartsen.push(
         new FormGroup({
           id: new FormControl(h.id),
@@ -90,7 +90,7 @@ export class TeamSamenstelling {
         this.toastService.add('Opgeslagen');
       },
       error: (err) => {
-        this.toastService.add('Er is iets fout gelopen');
+        this.toastService.add('Er is iets fout gelopen', 3000, 'error');
       },
     });
   };

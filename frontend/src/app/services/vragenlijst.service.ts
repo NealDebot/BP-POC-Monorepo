@@ -7,7 +7,11 @@ const baseURL = 'http://localhost:3000';
 })
 export class VragenlijstService {
   constructor(private httpClient: HttpClient) {}
-  public getVragenlijsten= (praktijkId: string) => {
+  public getVragenlijsten = (praktijkId: string) => {
     return this.httpClient.get(baseURL + '/vragenlijst/' + praktijkId);
-  }
+  };
+
+  public saveAntwoord = (data: any) => {
+    return this.httpClient.put(baseURL + '/vragenlijst/', data);
+  };
 }

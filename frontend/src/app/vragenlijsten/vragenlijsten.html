@@ -25,7 +25,7 @@
               </div>
             </td>
             <th>
-              <button class="btn btn-primary btn-xs">
+              <button class="btn btn-primary btn-xs" (click)="openSurvey(v)">
                 Start vragenlijst
               </button>
             </th>
@@ -46,14 +46,44 @@
               </div>
             </td>
             <th>
-              <button class="btn btn-primary btn-xs">
+              <button class="btn btn-primary btn-xs" (click)="hervatSurvey(a)">
                 Verder invullen
               </button>
             </th>
+          </tr>
+        }
+        @if (vragenlijsten()!.newVragenlijsten.length === 0 && vragenlijsten()!.antwoorden.length === 0){
+          <tr>
+            <td colspan="4">Er zijn op dit moment geen openstaande vragenlijsten.</td>
           </tr>
         }
     </table>
   </div>
 } @else {
   <p>Loading...</p>
+}
+
+
+@if (isModalOpen()) {
+  <div class="modal modal-open">
+    <div class="modal-box w-11/12 max-w-3xl h-11/12 overflow-hidden pb-4">
+
+      <!-- Close button -->
+      <div class="relative z-50 flex justify-end">
+        <button
+          class="btn btn-sm btn-circle btn-ghost"
+          (click)="closeModal()">
+          ✕
+        </button>
+      </div>
+
+      <!-- SurveyJS renders here -->
+      @if (activeSurvey()) {
+        <survey [model]="activeSurvey()!"></survey>
+      }
+
+    </div>
+    <!-- Click backdrop to close -->
+    <div class="modal-backdrop" (click)="closeModal()"></div>
+  </div>
 }
