@@ -92,4 +92,17 @@ model survey_antwoorden{
   vragenlijst_id Int
   praktijk praktijk @relation(fields: [praktijk_id], references: [id])
   praktijk_id String
+
+  rapports rapport[]
+}
+
+model rapport{
+  id Int @id @default(autoincrement())
+  titel String
+  created_at DateTime @default(now())
+  samenvatting String @db.NVarChar(Max)
+  Uitleg String @db.NVarChar(Max)
+
+  survey_antwoord survey_antwoorden @relation(fields: [survey_antwoord_id], references: [id])
+  survey_antwoord_id Int
 }

@@ -7,6 +7,7 @@ import vragenlijstRoutes from './routes/vragenlijstRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import praktijkRoutes from './routes/praktijkRoutes.js'
 import teamRoutes from './routes/teamRoutes.js'
+import raportRoutes from './routes/rapportRoutes.js'
 
 connectDB()
 
@@ -31,6 +32,7 @@ app.use('/vragenlijst', vragenlijstRoutes)
 app.use('/auth', authRoutes)
 app.use('/praktijk', praktijkRoutes)
 app.use('/team', teamRoutes)
+app.use('/rapport',raportRoutes)
 
 process.on("unhandledRejection", (error) => {
     console.error("Unhandled Rejection:", error)

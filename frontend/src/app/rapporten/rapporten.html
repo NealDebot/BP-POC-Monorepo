@@ -1,1 +1,50 @@
-<p>rapporten works!</p>
+@if (rapporten().length > 0) {
+  <div class="flex h-full">
+
+    <!-- Sidebar -->
+    <div class="w-max shrink-0 border-r border-base-content/10 flex flex-col gap-1 p-2">
+      @for (r of rapporten(); track r.id) {
+        <button
+          class="text-left px-3 py-2 rounded-lg hover:bg-base-200 transition-colors"
+          [class.bg-base-200]="selectedRapport()?.id === r.id"
+          [class.font-semibold]="selectedRapport()?.id === r.id"
+          (click)="selectRapport(r)">
+          <p class="text-sm font-medium truncate">{{ r.titel }}</p>
+          <p class="text-xs text-base-content/50">
+            gegenereerd op: {{ r.created_at | date:'dd/MM/yyyy' }}
+          </p>
+        </button>
+      }
+    </div>
+
+    <!-- Report content -->
+    @if (selectedRapport(); as rapport) {
+      <div class="flex-1 overflow-y-auto p-8 w-full">
+
+        <h1 class="text-2xl font-bold mb-8">
+          {{ rapport.titel }} {{ rapport.created_at | date:'dd/MM/yyyy' }}
+        </h1>
+
+        <!-- Samenvatting -->
+        <div class="bg-white rounded-xl p-6 mb-6 shadow-sm border border-base-content/5">
+          <h2 class="text-xl font-semibold mb-3">Samenvatting</h2>
+          <p class="text-base-content/80 leading-relaxed">{{ rapport.samenvatting }}</p>
+        </div>
+
+        <!-- Uitgebreide Uitleg -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-base-content/5">
+          <h2 class="text-xl font-semibold mb-3">Uitgebreide Uitleg</h2>
+          <p class="text-base-content/80 leading-relaxed whitespace-pre-line">
+            {{ rapport.Uitleg }}
+          </p>
+        </div>
+
+      </div>
+    }
+
+  </div>
+} @else {
+  <div class="flex items-center justify-center h-48 text-base-content/40">
+    <p>Geen rapporten beschikbaar.</p>
+  </div>
+}
