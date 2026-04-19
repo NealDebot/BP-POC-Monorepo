@@ -5,6 +5,7 @@ import { VragenlijstService } from '../services/vragenlijst.service';
 import { Model } from 'survey-core';
 import { SurveyModule } from 'survey-angular-ui';
 import { Toast } from '../services/toast';
+import 'survey-core/survey-core.min.css';
 
 @Component({
   selector: 'app-vragenlijsten',
