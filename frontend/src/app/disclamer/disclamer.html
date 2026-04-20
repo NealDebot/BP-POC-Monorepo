@@ -1,0 +1,26 @@
+@if (isVisible()) {
+  <div class="bg-warning/20 border-l-4 border-warning px-5 py-3 flex items-start gap-4">
+
+    <span class="text-warning text-xl mt-0.5">⚠️</span>
+
+    <div class="flex-1 text-sm text-base-content/80">
+      <span class="font-semibold text-base-content">Proof of Concept – Bachelorproef</span>
+      <span class="mx-1">·</span>
+      Deze applicatie is ontwikkeld als proof of concept in het kader van een bachelorproef.
+      De gegenereerde rapporten zijn <span class="font-semibold">mock rapporten</span> en
+      geven aanbevelingen over de toegankelijkheid van uw praktijk — de inhoud ervan is
+      niet gegarandeerd correct.
+      <span class="mx-1">·</span>
+      Voor de beste ervaring raden we aan om eerst de
+      <span class="font-semibold">praktijk informatie</span> volledig aan te vullen
+      voordat u een vragenlijst invult.
+    </div>
+
+    <button
+      class="btn btn-xs btn-ghost text-base-content/50 hover:text-base-content mt-0.5"
+      (click)="dismiss()">
+      ✕
+    </button>
+
+  </div>
+}

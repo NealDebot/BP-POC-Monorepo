@@ -5,9 +5,9 @@
 } @else {
   @if ((auth.isAuthenticated$ | async) && (auth.user$ | async)) {
     <app-nav-bar></app-nav-bar>
+    <app-disclamer></app-disclamer>
+    <router-outlet></router-outlet>
   }
-  <router-outlet></router-outlet>
-
   @for (toast of toastService.toasts(); track toast; let i = $index) {
     <div class="toast toast-bottom toast-end">
       <div [className]="toast.type === 'success' ? 'alert alert-success': 'alert alert-error'">

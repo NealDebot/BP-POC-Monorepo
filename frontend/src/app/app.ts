@@ -6,10 +6,11 @@ import { NavBar } from './nav-bar/nav-bar';
 import { PraktijkService } from './services/praktijk.service';
 import { filter, take, switchMap } from 'rxjs';
 import { Toast } from './services/toast';
+import { Disclamer } from './disclamer/disclamer';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, NavBar],
+  imports: [CommonModule, RouterOutlet, NavBar, Disclamer],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
