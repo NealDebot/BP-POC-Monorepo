@@ -1,20 +1,9 @@
 import {PrismaClient} from "@prisma/client";
-import {PrismaMssql} from "@prisma/adapter-mssql"
-
-const adapter = new PrismaMssql({
-    server: process.env.DATABASE_SERVER,
-    port: Number(process.env.DATABASE_PORT),
-    database: process.env.DATABASE,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PSWD,
-    options: {
-        trustServerCertificate: true,
-    }
-});
+import {PrismaPg} from "@prisma/adapter-pg"
 
 const prisma = new PrismaClient({
     log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
-    adapter: adapter
+    adapter: new PrismaPg({connectionString: process.env.DATABASE_URL})
 })
 
 const connectDB = async () => {

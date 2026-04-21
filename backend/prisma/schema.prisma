@@ -8,101 +8,101 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlserver"
+  provider = "postgresql"
 }
 
 model praktijk {
-  id String @id @default(uuid())
-  auth0_id String @unique
-  telefoon_nummer String?
-  e_mail String?
-  praktijkvorm String?
-  betalingssysteem String?
-  patient_stop String?
-  online_afspraken Boolean @default(false)
+  id                String  @id @default(uuid())
+  auth0_id          String  @unique
+  telefoon_nummer   String?
+  e_mail            String?
+  praktijkvorm      String?
+  betalingssysteem  String?
+  patient_stop      String?
+  online_afspraken  Boolean @default(false)
   multidisciplinair Boolean @default(false)
-  telesecretariaat Boolean @default(false)
-  netwerk_type String?
-  netwerk_aantal Int?
-  netwerk_riziv Boolean @default(false)
+  telesecretariaat  Boolean @default(false)
+  netwerk_type      String?
+  netwerk_aantal    Int?
+  netwerk_riziv     Boolean @default(false)
 
-  team team? @relation(fields: [team_id], references: [id])
-  team_id Int? @unique
-  adressen adres[]
+  team              team?               @relation(fields: [team_id], references: [id])
+  team_id           Int?                @unique
+  adressen          adres[]
   surveyAntwoordens survey_antwoorden[]
 }
 
 model team {
-  id Int @id @default(autoincrement())
-  coordinator_directeur Boolean @default(false)
-  onthaal_administratief Boolean @default(false)
-  verpleegkundige Boolean @default(false)
-  dietist_voedingsdeskundige Boolean @default(false)
+  id                                         Int     @id @default(autoincrement())
+  coordinator_directeur                      Boolean @default(false)
+  onthaal_administratief                     Boolean @default(false)
+  verpleegkundige                            Boolean @default(false)
+  dietist_voedingsdeskundige                 Boolean @default(false)
   kinesitherapeut_manueeltherapeut_osteopaat Boolean @default(false)
-  sociaal_werker Boolean @default(false)
-  podoloog Boolean @default(false)
-  psycholoog Boolean @default(false)
-  gezondheidspromoter Boolean @default(false)
-  andere String?
+  sociaal_werker                             Boolean @default(false)
+  podoloog                                   Boolean @default(false)
+  psycholoog                                 Boolean @default(false)
+  gezondheidspromoter                        Boolean @default(false)
+  andere                                     String?
 
-  praktijk praktijk?
+  praktijk   praktijk?
   huisartsen huisarts[]
 }
 
 model huisarts {
-  id Int @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   in_opleiding Boolean @default(false)
-  email String
-  rizivnr String
+  email        String
+  rizivnr      String
   geboortejaar Int
-  stopzetten String
+  stopzetten   String
 
-  team team @relation(fields: [team_id], references: [id])
-  team_id Int
-  adres adres? @relation(fields: [adres_id],references: [id], onDelete: NoAction, onUpdate: NoAction)
+  team     team   @relation(fields: [team_id], references: [id])
+  team_id  Int
+  adres    adres? @relation(fields: [adres_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   adres_id Int?
 }
 
 model adres {
-  id Int @id @default(autoincrement())
-  straat String
-  huisnr String
+  id       Int    @id @default(autoincrement())
+  straat   String
+  huisnr   String
   postcode String
-  Stad String
+  Stad     String
 
-  huisartsen huisarts[]
-  praktijk praktijk @relation(fields: [praktijk_id], references: [id])
+  huisartsen  huisarts[]
+  praktijk    praktijk   @relation(fields: [praktijk_id], references: [id])
   praktijk_id String
 }
 
 model vragenlijst {
-  id Int @id @default(autoincrement())
-  naam String
-  json String @db.NVarChar(Max)
-  deadline DateTime
+  id                Int                 @id @default(autoincrement())
+  naam              String
+  json              String
+  deadline          DateTime
   surveyAntwoordens survey_antwoorden[]
 }
 
-model survey_antwoorden{
-  id Int @id @default(autoincrement())
-  antwoorden String @db.NVarChar(Max)
+model survey_antwoorden {
+  id          Int    @id @default(autoincrement())
+  antwoorden  String
   vooruitgang Int
 
-  vragenlijst vragenlijst @relation(fields: [vragenlijst_id], references: [id])
+  vragenlijst    vragenlijst @relation(fields: [vragenlijst_id], references: [id])
   vragenlijst_id Int
-  praktijk praktijk @relation(fields: [praktijk_id], references: [id])
-  praktijk_id String
+  praktijk       praktijk    @relation(fields: [praktijk_id], references: [id])
+  praktijk_id    String
 
   rapports rapport[]
 }
 
-model rapport{
-  id Int @id @default(autoincrement())
-  titel String
-  created_at DateTime @default(now())
-  samenvatting String @db.NVarChar(Max)
-  Uitleg String @db.NVarChar(Max)
+model rapport {
+  id           Int      @id @default(autoincrement())
+  titel        String
+  created_at   DateTime @default(now())
+  samenvatting String
+  Uitleg       String
 
-  survey_antwoord survey_antwoorden @relation(fields: [survey_antwoord_id], references: [id])
+  survey_antwoord    survey_antwoorden @relation(fields: [survey_antwoord_id], references: [id])
   survey_antwoord_id Int
 }

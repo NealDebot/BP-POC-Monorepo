@@ -34,25 +34,4 @@ app.use('/praktijk', praktijkRoutes)
 app.use('/team', teamRoutes)
 app.use('/rapport',raportRoutes)
 
-process.on("unhandledRejection", (error) => {
-    console.error("Unhandled Rejection:", error)
-    server.close(async () => {
-        await disconnectDB()
-        process.exit(1)
-    })
-})
-
-process.on("uncaughtException", async (error) => {
-    console.error("Uncaught Exception:", error)
-    await disconnectDB()
-    process.exit(1)
-})
-
-process.on("SIGTERM", () => {
-    console.error("SIGTERM received, shutting down gracefully")
-    server.close(async () => {
-        await disconnectDB()
-        process.exit(0)
-    })
-})
 export default app
