@@ -14,6 +14,7 @@ export const routes: Routes = [
     path: 'praktijkInformatie',
     component: PraktijkInfo,
     title: 'Praktijk Informatie',
-    canActivate: [authGuard]
-  }
+    canActivate: [authGuard],
+  },
+  { path: '**', redirectTo: '' },
 ];
