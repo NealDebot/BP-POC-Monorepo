@@ -32,7 +32,9 @@ export class App implements OnInit {
         filter((isAuthenticated) => isAuthenticated),
         take(1),
         switchMap(() => this.auth.user$),
+        take(1),
         switchMap((user) => this.praktijkService.userSync(user!.sub!)),
+        take(1)
       )
       .subscribe((data) => {
         if (!data.data.praktijk.betalingssysteem) {
