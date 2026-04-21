@@ -62,10 +62,10 @@ export class TeamSamenstelling {
       gezondheidspromoter: p.team.gezondheidspromoter,
       kinesitherapeut_manueeltherapeut_osteopaat: p.team.kinesitherapeut_manueeltherapeut_osteopaat,
       podoloog: p.team.podoloog,
-      psycholoog: p.team.podoloog,
+      psycholoog: p.team.psycholoog,
       onthaal_administratief: p.team.onthaal_administratief,
       sociaal_werker: p.team.sociaal_werker,
-      verpleegkundige: p.team.sociaal_werker,
+      verpleegkundige: p.team.verpleegkundige,
     });
     this.huisartsen.clear();
     for (const h of p.team.huisartsen) {
