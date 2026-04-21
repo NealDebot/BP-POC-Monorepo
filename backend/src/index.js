@@ -13,7 +13,7 @@ connectDB()
 
 const app = express();
 app.use(cors({
-    origin: ['http://localhost:4200'],
+    origin: ['http://localhost:4200','https://nealdebot.github.io','https://nealdebot.github.io/BP-POC-Monorepo'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     preflightContinue: false,

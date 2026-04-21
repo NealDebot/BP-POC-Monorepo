@@ -8,6 +8,6 @@ export const environment = {
     },
   },
   api: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://capable-adaptation-production.up.railway.app',
   },
 };
