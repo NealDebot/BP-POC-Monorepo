@@ -13,6 +13,6 @@ export class NavBar {
   protected auth: AuthService = inject(AuthService);
 
   logout(): void {
-    this.auth.logout();
+    this.auth.logout({logoutParams: {returnTo: window.location.origin}});
   }
 }
