@@ -18,6 +18,9 @@ export const appConfig: ApplicationConfig = {
       authorizationParams: {
         redirect_uri: window.location.origin + '/BP-POC-Monorepo/', //todo: niet hardcode
       },
+      cacheLocation: 'localstorage',
+      useRefreshTokens: true,
+      useRefreshTokensFallback: true, // ← extra fallback voor Firefox
     }),
   ],
 };
