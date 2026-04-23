@@ -23,7 +23,7 @@ export class AlgemeneInformatie {
   public algemeneInfoForm = new FormGroup({
     telefoon_nummer: new FormControl(this.praktijk()?.telefoon_nummer, [
       Validators.pattern(
-        '(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})',
+        '^[- +()0-9]+$',
       ),
     ]),
     e_mail: new FormControl(this.praktijk()?.e_mail, [Validators.email]),

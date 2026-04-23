@@ -23,7 +23,7 @@
           <legend class="fieldset-legend">Patiënten Stop</legend>
           <select class="select" formControlName="patient_stop">
             <option>Neen</option>
-            <option>Ja, gedeeltelijk</option>
+            <option>Ja, onder voorwaarden</option>
             <option>Ja, volledig</option>
           </select>
         </fieldset>
@@ -42,56 +42,75 @@
       </div>
     </div>
     <div class="divider"></div>
-
+    <h3>Netwerk</h3>
     <div class="card bg-base-100 card-xs shadow-sm my-5 w-96">
       <div class="card-body">
-        <p>Werkt de praktijk samen met andere praktijken voor ...</p>
+        <p>Werkt de praktijk samen met andere praktijken (in de vorm van een netwerk) voor ...</p>
         <label class="flex gap-2 items-center cursor-pointer">
-          <input type="checkbox" [checked]="netwerk_typeChecked('Geen samenwerking')" class="checkbox"  (click)="updateNetwerk_type('Geen samenwerking')"/>
+          <input type="checkbox" [checked]="netwerk_typeChecked('Geen samenwerking')" class="checkbox"
+                 (click)="updateNetwerk_type('Geen samenwerking')"/>
           Geen samenwerking
         </label>
-        <label class="flex gap-2 items-center cursor-pointer" >
-          <input type="checkbox" [checked]="netwerk_typeChecked('Organisatie van de permanentie (buiten de wachtdienst)')" class="checkbox" (click)="updateNetwerk_type('Organisatie van de permanentie (buiten de wachtdienst)')"/>
+        <label class="flex gap-2 items-center cursor-pointer">
+          <input type="checkbox"
+                 [checked]="netwerk_typeChecked('Organisatie van de permanentie (buiten de wachtdienst)')"
+                 class="checkbox"
+                 (click)="updateNetwerk_type('Organisatie van de permanentie (buiten de wachtdienst)')"/>
           Organisatie van de permanentie (buiten de wachtdienst)
         </label>
-        <label class="flex gap-2 items-center cursor-pointer" >
-          <input type="checkbox" [checked]="netwerk_typeChecked('Vervanging tijdens geplande afwezigheid')" class="checkbox" (click)="updateNetwerk_type('Vervanging tijdens geplande afwezigheid')" />
+        <label class="flex gap-2 items-center cursor-pointer">
+          <input type="checkbox" [checked]="netwerk_typeChecked('Vervanging tijdens geplande afwezigheid')"
+                 class="checkbox" (click)="updateNetwerk_type('Vervanging tijdens geplande afwezigheid')"/>
           Vervanging tijdens geplande afwezigheid
         </label>
-        <label class="flex gap-2 items-center cursor-pointer" >
-          <input type="checkbox" [checked]="netwerk_typeChecked('Vervanging tijdens onverwachte afwezigheid')" class="checkbox" (click)="updateNetwerk_type('Vervanging tijdens onverwachte afwezigheid')"/>
+        <label class="flex gap-2 items-center cursor-pointer">
+          <input type="checkbox" [checked]="netwerk_typeChecked('Vervanging tijdens onverwachte afwezigheid')"
+                 class="checkbox" (click)="updateNetwerk_type('Vervanging tijdens onverwachte afwezigheid')"/>
           Vervanging tijdens onverwachte afwezigheid
         </label>
-        <label class="flex gap-2 items-center cursor-pointer" >
-          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeelde patientendossiers')" class="checkbox" (click)="updateNetwerk_type('Gedeelde patientendossiers')"/>
+        <label class="flex gap-2 items-center cursor-pointer">
+          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeelde patientendossiers')" class="checkbox"
+                 (click)="updateNetwerk_type('Gedeelde patientendossiers')"/>
           Gedeelde patiëntendossiers
         </label>
-        <label class="flex gap-2 items-center cursor-pointer" >
-          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeelde administratieve medewerker(s)')" class="checkbox" (click)="updateNetwerk_type('Gedeelde administratieve medewerker(s)')"/>
+        <label class="flex gap-2 items-center cursor-pointer">
+          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeelde administratieve medewerker(s)')"
+                 class="checkbox" (click)="updateNetwerk_type('Gedeelde administratieve medewerker(s)')"/>
           Gedeelde administratieve medewerker(s)
         </label>
-        <label class="flex gap-2 items-center cursor-pointer" >
-          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeelde verpleegkundige(n)')" class="checkbox" (click)="updateNetwerk_type('Gedeelde verpleegkundige(n)')"/>
+        <label class="flex gap-2 items-center cursor-pointer">
+          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeelde verpleegkundige(n)')" class="checkbox"
+                 (click)="updateNetwerk_type('Gedeelde verpleegkundige(n)')"/>
           Gedeelde verpleegkundige(n)
         </label>
-        <label class="flex gap-2 items-center cursor-pointer" >
-          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeeld materiaal')" class="checkbox" (click)="updateNetwerk_type('Gedeeld materiaal')"/>
+        <label class="flex gap-2 items-center cursor-pointer">
+          <input type="checkbox" [checked]="netwerk_typeChecked('Gedeeld materiaal')" class="checkbox"
+                 (click)="updateNetwerk_type('Gedeeld materiaal')"/>
           Gedeeld materiaal
         </label>
         <label class="flex gap-2 items-center cursor-pointer">
-          <input type="checkbox" [checked]="netwerk_typeChecked('Casusbespreking overleg richtlijnen, incidenten-analyse,...')" class="checkbox" (click)="updateNetwerk_type('Casusbespreking overleg richtlijnen, incidenten-analyse,...')"/>
+          <input type="checkbox"
+                 [checked]="netwerk_typeChecked('Casusbespreking overleg richtlijnen, incidenten-analyse,...')"
+                 class="checkbox"
+                 (click)="updateNetwerk_type('Casusbespreking overleg richtlijnen, incidenten-analyse,...')"/>
           Casusbespreking overleg richtlijnen, incidenten-analyse,...
         </label>
-        <label class="flex gap-2 items-center cursor-pointer" >
-          <input type="checkbox" [checked]="netwerk_typeChecked('Andere')" class="checkbox" (click)="updateNetwerk_type('Andere')"/>
+        <label class="flex gap-2 items-center cursor-pointer">
+          <input type="checkbox" [checked]="netwerk_typeChecked('Andere')" class="checkbox"
+                 (click)="updateNetwerk_type('Andere')"/>
           Andere
         </label>
         <fieldset class="fieldset p-4">
-          <legend class="fieldset-legend">Aantal praktijken in Netwerk?  (inclusief eigen praktijk)</legend>
+          <legend class="fieldset-legend">Aantal praktijken in Netwerk? (inclusief eigen praktijk)</legend>
           <input type="number" class="input" min="0" formControlName="netwerk_aantal"/>
         </fieldset>
         <label class="flex justify-between cursor-pointer">
-          RIZIV erkend netwerk?
+          <div>
+            RIZIV erkend netwerk?
+            <div class="tooltip" data-tip="Wordt het netwerk door het RIZIV herkend als een RIZIV netwerk?">
+              <p type="button" class="btn btn-circle btn-xs"> i </p>
+            </div>
+          </div>
           <input type="checkbox" checked="checked" class="toggle" formControlName="netwerk_riziv"/>
         </label>
       </div>

@@ -5,6 +5,7 @@ import { VragenlijstService } from '../services/vragenlijst.service';
 import { Model } from 'survey-core';
 import { SurveyModule } from 'survey-angular-ui';
 import { Toast } from '../services/toast';
+import { take } from 'rxjs';
 import 'survey-core/survey-core.min.css';
 
 @Component({
@@ -19,9 +20,10 @@ export class Vragenlijsten {
     effect(() => {
       const p = this.praktijkService.praktijk();
       if (p) {
-        this.vragenlijstService
-          .getVragenlijsten(p.id)
-          .subscribe((data: any) => this.vragenlijsten.set(data));
+        this.vragenlijstService.getVragenlijsten(p.id).subscribe((data: any) => {
+          this.vragenlijsten.set(data);
+          take(1);
+        });
       }
     });
   }

@@ -88,6 +88,9 @@ export class TeamSamenstelling {
       next: (data) => {
         this.praktijkService.praktijk.set(data.result);
         this.toastService.add('Opgeslagen');
+        if (this.praktijk()?.betalingssysteem && this.praktijk()?.telefoon_nummer) {
+          this.toastService.add('Profiel volledig ingevuld! Ga naar vragenlijsten & rapporten voor een vragenlijst in te vullen en een rapport te genereren!', 10000, 'success');
+        }
       },
       error: (err) => {
         this.toastService.add('Er is iets fout gelopen', 3000, 'error');
