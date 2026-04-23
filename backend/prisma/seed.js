@@ -11,7 +11,7 @@ const jsonSurvey = {
                 {
                     "type": "dropdown",
                     "name": "question1",
-                    "title": "Wie vult deze praktijkfische over de huisartsenpraktijk in?",
+                    "title": "Wie vult deze praktijkfiche over de huisartsenpraktijk in?",
                     "isRequired": true,
                     "choices": [
                         {
@@ -115,7 +115,7 @@ const jsonSurvey = {
                     "type": "boolean",
                     "name": "question6",
                     "visibleIf": "{question5} = false",
-                    "title": "Heeft de praktijk in de voorbije 2 jaar overwogen om aanpassingen uit te voeren aan het prakijkgebouw?",
+                    "title": "Heeft de praktijk in de voorbije 2 jaar overwogen om aanpassingen uit te voeren aan het praktijkgebouw?",
                     "isRequired": true,
                     "labelTrue": "Ja",
                     "labelFalse": "Neen",
@@ -162,7 +162,7 @@ const jsonSurvey = {
         {
             "name": "page2",
             "title": "Andere genomen maatregelen",
-            "description": "Mogenlijks Ondernam uw praktijk al maatregelen om een tekort aan capaciteit te ondervangen of plant dit te doen. Geef voor elk van onderstaande maatregelen aan of de praktijk dit al heeft gedaan of van plan is om te doen.",
+            "description": "Mogelijks ondernam uw praktijk al maatregelen om een tekort aan capaciteit te ondervangen of plant dit te doen. Geef voor elk van onderstaande maatregelen aan of de praktijk dit al heeft gedaan of van plan is om te doen.",
             "elements": [
                 {
                     "type": "matrix",
@@ -172,7 +172,7 @@ const jsonSurvey = {
                     "columns": [
                         {
                             "value": "Column 1",
-                            "text": "Dit doen we al of hebben we al gedaan."
+                            "text": "Dit doen we al of hebben we al gedaan"
                         },
                         {
                             "value": "Column 2",
@@ -210,7 +210,7 @@ const jsonSurvey = {
                     "columns": [
                         {
                             "value": "Column 1",
-                            "text": "Dit doen we al of hebben we al gedaan."
+                            "text": "Dit doen we al of hebben we al gedaan"
                         },
                         {
                             "value": "Column 2",
@@ -264,7 +264,7 @@ const jsonSurvey = {
                     "columns": [
                         {
                             "value": "Column 1",
-                            "text": "Dit doen we al of hebben we al gedaan."
+                            "text": "Dit doen we al of hebben we al gedaan"
                         },
                         {
                             "value": "Column 2",

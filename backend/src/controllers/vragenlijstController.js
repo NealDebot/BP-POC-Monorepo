@@ -15,7 +15,8 @@ const getVragenlijstenForPraktijk = async (req, res) => {
         where: {
             vooruitgang: {
                 lt: 100
-            }
+            },
+            praktijk_id: praktijkId
         },
         include: {vragenlijst: true}
     })
