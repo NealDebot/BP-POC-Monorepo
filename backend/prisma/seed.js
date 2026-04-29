@@ -44,7 +44,7 @@ const jsonSurvey = {
                 {
                     "type": "text",
                     "name": "question2",
-                    "title": "Hoevel patiënten met een globaal medisch dossier (GMD) telt deze praktijk?",
+                    "title": "Hoeveel patiënten met een globaal medisch dossier (GMD) telt deze praktijk?",
                     "isRequired": true,
                     "visibleIf": "{betalingssysteem} = 'Per prestatie'",
                     "inputType": "number"
@@ -252,7 +252,7 @@ const jsonSurvey = {
                         },
                         {
                             "value": "Row 7",
-                            "text": "Toepassen van eHelth mogelijkheden vb. videoconsultaties"
+                            "text": "Toepassen van eHealth mogelijkheden vb. videoconsultaties"
                         }
                     ]
                 },
