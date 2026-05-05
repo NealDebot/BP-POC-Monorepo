@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, take } from 'rxjs';
 import { Praktijk } from '../interfaces/praktijk';
-import { environment } from '../../environments/environment'
+import { environment } from '../../environments/environment';
 
 const baseURL = environment.api.baseURL;
 @Injectable({
@@ -29,7 +29,7 @@ export class PraktijkService {
     return this.httpClient.patch(baseURL + '/praktijk/' + this.praktijk()!.id + '/kenmerken', data);
   }
 
-  updateTeam(data:any): Observable<any> {
+  updateTeam(data: any): Observable<any> {
     return this.httpClient.patch(baseURL + '/team/' + this.praktijk()!.team.id, data);
   }
 }

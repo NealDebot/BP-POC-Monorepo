@@ -2,6 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { switchMap } from 'rxjs';
+import {catchError} from 'rxjs/operators'
 import {environment} from '../../environments/environment';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
@@ -19,5 +20,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         });
         return next(authReq);
       }),
+      catchError((err)=>{
+        if (err?.error === 'login_required') {
+          return next(req)
+        }
+        throw err;
+      })
     );
 };

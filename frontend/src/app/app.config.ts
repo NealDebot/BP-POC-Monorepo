@@ -17,6 +17,8 @@ export const appConfig: ApplicationConfig = {
       clientId: environment.auth0.clientId,
       authorizationParams: {
         redirect_uri: window.location.origin + '/BP-POC-Monorepo/', //todo: niet hardcode
+        audience: environment.auth0.authorizationParams.audience,
+        scope: 'openid profile email offline_access',
       },
       cacheLocation: 'localstorage',
       useRefreshTokens: true,

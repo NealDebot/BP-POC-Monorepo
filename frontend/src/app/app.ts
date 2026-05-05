@@ -4,7 +4,8 @@ import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { NavBar } from './nav-bar/nav-bar';
 import { PraktijkService } from './services/praktijk.service';
-import { filter, take, switchMap } from 'rxjs';
+import { filter, take, switchMap,of } from 'rxjs';
+import { catchError} from 'rxjs/operators';
 import { Toast } from './services/toast';
 import { Disclamer } from './disclamer/disclamer';
 
@@ -31,12 +32,21 @@ export class App implements OnInit {
         switchMap(() => this.auth.isAuthenticated$),
         filter((isAuthenticated) => isAuthenticated),
         take(1),
+        switchMap(()=> this.auth.getAccessTokenSilently().pipe(catchError((error)=>{
+          if (error.error === 'login_required') {
+            this.auth.loginWithRedirect();
+            return of(null)
+          }
+          throw error;
+        }))),
+        take(1),
         switchMap(() => this.auth.user$),
         take(1),
         switchMap((user) => this.praktijkService.userSync(user!.sub!)),
         take(1)
       )
       .subscribe((data) => {
+        // @ts-ignore
         if (!data.data.praktijk.betalingssysteem) {
           this.router.navigate(['/praktijkInformatie']);
         }
